@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstract
 {
-    public interface ICarDal:IEntityRepositori<Car>
+    public interface ICarDal:IEntityRepository<Car>
     {
         List<CarDetailDTO> GetCarDetails();
     }
