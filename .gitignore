@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/WebAPI/wwwroot/UploadsImages/308638_2020_civic_type_r_limited_edition.jpg
+/WebAPI/wwwroot/UploadsImages/Honda-Civic-type-R-cover-MAIN.jpg
+/WebAPI/wwwroot/DefaultImage.jpg
