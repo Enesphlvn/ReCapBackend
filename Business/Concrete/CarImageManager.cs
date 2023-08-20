@@ -8,11 +8,6 @@ using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
@@ -32,6 +27,7 @@ namespace Business.Concrete
             IResult result = BusinessRules.Run(CheckIfImageLimitExceded(carImage.CarId));
             if (result != null)
             {
+                //return new ErrorResult(Messages.CarImageLimitexceded);
                 return result;
             }
 
@@ -57,7 +53,7 @@ namespace Business.Concrete
 
         public IDataResult<List<CarImage>> GetByCarId(int carId)
         {
-            IResult result = BusinessRules.Run(CheckIfCarImageExists(carId));
+            var result = BusinessRules.Run(CheckIfCarImageExists(carId));
             if (result != null)
             {
                 return new ErrorDataResult<List<CarImage>>(GetDefaultImage(carId).Data);
@@ -101,7 +97,7 @@ namespace Business.Concrete
         private IDataResult<List<CarImage>> GetDefaultImage(int carId)
         {
             List<CarImage> carImage = new List<CarImage>();
-            carImage.Add(new CarImage {  CarId = carId , Date = DateTime.Now, ImagePath = "DefaultImage.jpg"});
+            carImage.Add(new CarImage {  CarId = carId , Date = DateTime.Now, ImagePath = "default_Image.jpg"});
             return new SuccessDataResult<List<CarImage>>(carImage);
         }
     }

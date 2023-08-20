@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Autofac;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Autofac;
+using Autofac.Extras.DynamicProxy;
 using Business.Abstract;
 using Business.Concrete;
+using Castle.DynamicProxy;
+using Core.Utilities.Helpers.FileHelper;
+using Core.Utilities.Interceptors;
+using Core.Utilities.Security;
+using Core.Utilities.Security.Jwt;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
-using Autofac.Extras.DynamicProxy;
-using Castle.DynamicProxy;
-using Core.Utilities.Interceptors;
-using Core.Utilities.Helpers.FileHelper;
 
 namespace Business.DependencyResolvers.Autofac
 {
@@ -41,6 +38,10 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<EfCarImageDal>().As<ICarImageDal>().SingleInstance();
 
             builder.RegisterType<FileHelperManager>().As<IFileHelper>().SingleInstance();
+
+            builder.RegisterType<AuthManager>().As<IAuthService>().SingleInstance();
+
+            builder.RegisterType<JwtHelper>().As<ITokenHelper>().SingleInstance();
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 

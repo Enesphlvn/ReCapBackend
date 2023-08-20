@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Business.Constants
+﻿namespace Business.Constants
 {
     public class Messages
     {
@@ -46,7 +40,16 @@ namespace Business.Constants
         public static string CarImageAdded = "Araba resmi eklendi";
         public static string CarImageDeleted = "Araba resmi silindi";
         public static string CarImageUpdated = "Araba resmi güncellendi";
-        internal static string CarNameAlreadyExists = "Bu isimde zaten başka bir araba var";
-        internal static string CarImageLimitexceded = "Araba resmi limiti aşıldı";
+
+        public static string CarNameAlreadyExists = "Bu isimde zaten başka bir araba var";
+        public static string CarImageLimitexceded = "Araba resmi limiti aşıldı";
+        public static string UserNotFound = "kullanıcı bulunamadı";
+        public static string PasswordError = "Şifre hatalı";
+        public static string SuccessfulLogin = "Sisteme giriş başarılı";
+
+        public static string UserAlreadyExists = "Bu kullanıcı zaten mevcut";
+        public static string UserRegistered = "Kullanıcı başarıyla kaydedildi";
+        public static string AccessTokenCreated = "Access Token başarıyla oluşturuldu";
+        public static string AuthorizationDenied = "Yetkilendirme reddedildi";
     }
 }
