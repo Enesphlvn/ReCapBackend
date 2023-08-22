@@ -13,6 +13,7 @@ namespace Core.Utilities.Interceptors
             IEnumerable<MethodInterceptionBaseAttribute> methodAttributes = type?.GetMethod(method.Name)
                 .GetCustomAttributes<MethodInterceptionBaseAttribute>(true);
             classAttributes.AddRange(methodAttributes);
+            //PerformanceAspect bu kısma eklenecek
 
             return classAttributes.OrderBy(x => x.Priority).ToArray();
         }
