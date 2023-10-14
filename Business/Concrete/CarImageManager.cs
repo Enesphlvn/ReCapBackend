@@ -6,7 +6,9 @@ using Core.Utilities.Business;
 using Core.Utilities.Helpers.FileHelper;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.AspNetCore.Http;
 
 namespace Business.Concrete
@@ -99,6 +101,11 @@ namespace Business.Concrete
             List<CarImage> carImage = new List<CarImage>();
             carImage.Add(new CarImage {  CarId = carId , Date = DateTime.Now, ImagePath = "default_Image.jpg"});
             return new SuccessDataResult<List<CarImage>>(carImage);
+        }
+
+        public IDataResult<List<CarsByCarImageDto>> GetCarsByCarImage(int carId)
+        {
+            return new SuccessDataResult<List<CarsByCarImageDto>>(_carImageDal.GetCarsByCarImage(carId));
         }
     }
 }

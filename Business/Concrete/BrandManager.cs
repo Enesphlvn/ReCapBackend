@@ -4,7 +4,9 @@ using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
+using Entities.DTOs;
 
 namespace Business.Concrete
 {
@@ -32,6 +34,19 @@ namespace Business.Concrete
         public IDataResult<List<Brand>> GetAll()
         {
             return new SuccessDataResult<List<Brand>>(_brandDal.GetAll() , Messages.BrandsListed);
+        }
+
+        public IDataResult<Brand> GetById(int brandId)
+        {
+            var result = new SuccessDataResult<Brand>(_brandDal.Get(b => b.BrandId == brandId), Messages.BrandIdListed);
+            if(result.Data != null)
+            {
+                return result;
+            }
+            else
+            {
+                return new ErrorDataResult<Brand>(Messages.BrandIsNull);
+            }
         }
 
         public IResult Update(Brand brand)

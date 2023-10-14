@@ -50,7 +50,47 @@ namespace DataAccess.Concrete.InMemory
             return _cars.Where(c => c.BrandId == brandId).ToList();
         }
 
+        public List<CarDetailDTO> GetCarByBrandAndColor(int brandId, int colorId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public CarDetailDTO GetCarDetailById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<CarDetailDTO> GetCarDetails()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<CarsByBrandIdDto> GetCarsByBrandId()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<CarsByBrandIdDto> GetCarsByBrandId(int brandId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<CarsByCarImageDto> GetCarsByCarImage()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<CarsByCarImageDto> GetCarsByCarImage(int carId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<CarsByColorIdDto> GetCarsByColorId()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<CarsByColorIdDto> GetCarsByColorId(int colorId)
         {
             throw new NotImplementedException();
         }
@@ -63,6 +103,11 @@ namespace DataAccess.Concrete.InMemory
             carToUpdate.ModelYear = car.ModelYear;
             carToUpdate.DailyPrice = car.DailyPrice;
             carToUpdate.Description = car.Description;
+        }
+
+        CarDetailDTO ICarDal.GetCarDetailById(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
