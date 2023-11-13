@@ -25,7 +25,8 @@ namespace DataAccess.Concrete.EntityFramework
                                  ColorName = cl.ColorName, 
                                  DailyPrice = c.DailyPrice, 
                                  Description = c.Description, 
-                                 ModelYear = c.ModelYear
+                                 ModelYear = c.ModelYear,
+                                 FindexScore = c.FindexScore
                              };
                 return result.ToList();
             }
@@ -49,7 +50,8 @@ namespace DataAccess.Concrete.EntityFramework
                                   ColorName = cl.ColorName,
                                   DailyPrice = c.DailyPrice,
                                   ModelYear = c.ModelYear,
-                                  Description = c.Description
+                                  Description = c.Description,
+                                  FindexScore = c.FindexScore
 
                               }).FirstOrDefault();
                 return result;
@@ -73,8 +75,8 @@ namespace DataAccess.Concrete.EntityFramework
                                  ColorName = cl.ColorName,
                                  DailyPrice = c.DailyPrice,
                                  ModelYear = c.ModelYear,
-                                 Description = c.Description
-
+                                 Description = c.Description,
+                                 FindexScore = c.FindexScore
                              };
                 return result.ToList();
             }
@@ -131,7 +133,15 @@ namespace DataAccess.Concrete.EntityFramework
                              join cl in context.Colors
                              on c.ColorId equals cl.ColorId
                              where cl.ColorId == colorId
-                             select new CarsByColorIdDto { CarName = c.CarName, BrandName = b.BrandName, ColorName = cl.ColorName, DailyPrice = c.DailyPrice, ModelYear = c.ModelYear, Description = c.Description };
+                             select new CarsByColorIdDto 
+                             { 
+                                 CarName = c.CarName, 
+                                 BrandName = b.BrandName, 
+                                 ColorName = cl.ColorName, 
+                                 DailyPrice = c.DailyPrice, 
+                                 ModelYear = c.ModelYear, 
+                                 Description = c.Description
+                             };
                 return result.ToList();
             }
         }

@@ -1,10 +1,10 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
-using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using Entities.DTOs;
 
@@ -13,14 +13,31 @@ namespace Business.Concrete
     public class RentalManager : IRentalService
     {
         IRentalDal _rentalDal;
-        public RentalManager(IRentalDal rentalDal)
+        ICarDal _carDal;
+        public RentalManager(IRentalDal rentalDal, ICarDal carDal)
         {
             _rentalDal = rentalDal;
+            _carDal = carDal;
         }
 
+        [SecuredOperation("rental.add,admin")]
         [ValidationAspect(typeof(RentalValidator))]
         public IResult Add(Rental rental)
         {
+            Random random = new Random();
+            int findexScore = random.Next(0, 1901);
+
+            Car car = _carDal.Get(c => c.Id == rental.CarId);
+            if(car == null )
+            {
+                return new ErrorResult(Messages.CarNotFound);
+            }
+
+            if(findexScore < car.FindexScore)
+            {
+                return new ErrorResult(Messages.FindexScoreIsNotEnough);
+            }
+
             var rentals = _rentalDal.GetAll(r => r.CarId == rental.CarId).OrderByDescending(r => r.RentDate).FirstOrDefault(); ;
             
             if(rentals != null)
@@ -28,7 +45,7 @@ namespace Business.Concrete
 
                 if (rentals.ReturnDate > rental.RentDate)
                 {
-                    return new ErrorResult(Messages.CarCannotBeRented);
+                    return new ErrorResult(Messages.CarWasRentedByElse);
                 }
 
                 _rentalDal.Add(rental);
@@ -48,6 +65,7 @@ namespace Business.Concrete
             
         }
 
+        [SecuredOperation("rental.delete,admin")]
         public IResult Delete(Rental rental)
         {
             _rentalDal.Delete(rental);
@@ -71,6 +89,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(r => r.CarId == carId));
         }
 
+        [SecuredOperation("rental.update,admin")]
         public IResult Update(Rental rental)
         {
             _rentalDal.Update(rental);

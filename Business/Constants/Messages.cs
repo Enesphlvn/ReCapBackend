@@ -1,4 +1,5 @@
 ﻿using Entities.Concrete;
+using Entities.DTOs;
 
 namespace Business.Constants
 {
@@ -55,17 +56,20 @@ namespace Business.Constants
 
         public static string UserAlreadyExists = "Bu kullanıcı zaten mevcut";
         public static string UserRegistered = "Kullanıcı başarıyla kaydedildi";
-        public static string AccessTokenCreated = "Access Token başarıyla oluşturuldu";
+        public static string AccessTokenCreated = "Sisteme giriş başarılı";
         public static string AuthorizationDenied = "Yetkiniz yok";
 
         public static string PaymentUpdated = "Güncellendi";
         public static string PaymentDeleted = "Silindi";
-        public static string PaymentAdded = "Eklendi";
+        public static string PaymentAdded = "Ödeme işlemi başarıyla tamamlandı";
         public static string PaymentsListed = "Ödemeler listelendi";
         public static string PayIsSuccessfull = "Ödeme başarılı";
 
         public static string RentalNotFound = "Kiralama kaydı bulunamadı";
-        public static string CarCannotBeRented = "bu araç başkası tarafından kiralanmış";
+        public static string CarWasRentedByElse = "bu araç başkası tarafından kiralanmış";
         public static string CardInformationIsIncorrect = "Kart bilgileri yanlış";
+        public static string CarNotFound = "Araba bulunamadı";
+        public static string FindexScoreIsNotEnough = "Findex puanı yetersiz, araç kiralanamıyor";
+        public static string CarNotFoundCriteria = "Bu kriterde bir araç bulunmamaktadır.";
     }
 }

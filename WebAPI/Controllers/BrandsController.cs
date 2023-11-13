@@ -62,10 +62,10 @@ namespace WebAPI.Controllers
             return BadRequest();
         }
 
-        [HttpPost("delete")]
-        public IActionResult Delete(Brand brand)
+        [HttpDelete("delete")]
+        public IActionResult Delete(int brandId)
         {
-            var result = _brandService.Delete(brand);
+            var result = _brandService.Delete(brandId);
             if (result.Success)
             {
                 return Ok(result);
