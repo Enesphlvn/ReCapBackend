@@ -71,5 +71,9 @@ namespace Business.Constants
         public static string CarNotFound = "Araba bulunamadı";
         public static string FindexScoreIsNotEnough = "Findex puanı yetersiz, araç kiralanamıyor";
         public static string CarNotFoundCriteria = "Bu kriterde bir araç bulunmamaktadır.";
+        public static string ThisMailAlreadyUse = "Bu mail zaten kullanılıyor";
+        public static string MailNotFound = "Mail bulunamadı";
+        public static string PasswordUpdated = "Şifre güncellendi";
+        public static string OldPasswordError = "Eski şifre hatalı";
     }
 }

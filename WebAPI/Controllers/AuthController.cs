@@ -16,7 +16,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("login")]
-        public ActionResult Login(UserForLoginDto userForLoginDto)
+        public IActionResult Login(UserForLoginDto userForLoginDto)
         {
             var userToLogin = _authService.Login(userForLoginDto);
             if (!userToLogin.Success)
@@ -27,28 +27,92 @@ namespace WebAPI.Controllers
             var result = _authService.CreateAccessToken(userToLogin.Data);
             if (result.Success)
             {
-                return Ok(result);
+                return Ok(result.Data);
             }
 
             return BadRequest(result.Message);
         }
 
         [HttpPost("register")]
-        public ActionResult Register(UserForRegisterDto userForRegisterDto)
+        public IActionResult Register(UserForRegisterDto userForRegisterDto)
         {
             var userExists = _authService.UserExists(userForRegisterDto.Email);
             if (!userExists.Success)
+
             {
                 return BadRequest(userExists.Message);
             }
 
-            var registerResult = _authService.Register(userForRegisterDto, userForRegisterDto.Password);
+            var registerResult = _authService.Register(userForRegisterDto);
             var result = _authService.CreateAccessToken(registerResult.Data);
             if (result.Success)
             {
                 return Ok(result.Data);
             }
 
+            return BadRequest(result.Message);
+        }
+
+        [HttpGet("getbyid")]
+        public IActionResult GetById(int id)
+        {
+            var result = _authService.GetById(id);
+
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            else
+            {
+                return BadRequest(result.Message);
+            }
+        }
+
+        [HttpGet("getbymail")]
+        public IActionResult GetByMail(string email)
+        {
+            var result = _authService.GetByMail(email);
+
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            else
+            {
+                return BadRequest(result.Message);
+            }
+        }
+
+        [HttpPut("update")]
+        public IActionResult Update(UpdateUserDto updateUserDto)
+        {
+            var result = _authService.Update(updateUserDto);
+            if (result.Success)
+            {
+                return Ok(result.Message);
+            }
+            return BadRequest(result.Message);
+        }
+
+        [HttpDelete("delete")]
+        public IActionResult Delete(int userId)
+        {
+            var result = _authService.Delete(userId);
+            if (result.Success)
+            {
+                return Ok(result.Message);
+            }
+            return BadRequest(result.Message);
+        }
+
+        [HttpPut("updatepassword")]
+        public IActionResult UpdatePassword(PasswordUpdateDto passwordUpdateDto)
+        {
+            var result = _authService.UpdatePassword(passwordUpdateDto);
+            if (result.Success)
+            {
+                return Ok(result.Message);
+            }
             return BadRequest(result.Message);
         }
     }

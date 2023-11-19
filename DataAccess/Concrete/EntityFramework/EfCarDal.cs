@@ -16,7 +16,10 @@ namespace DataAccess.Concrete.EntityFramework
                              on c.BrandId equals b.BrandId
                              join cl in context.Colors
                              on c.ColorId equals cl.ColorId
-                             where c.BrandId == brandId && c.ColorId == colorId
+                             where 
+                             (brandId > 0 ? c.BrandId == brandId : true) 
+                             && 
+                             (colorId > 0 ? c.ColorId == colorId : true)
                              select new CarDetailDTO()
                              {
                                  Id = c.Id, 
